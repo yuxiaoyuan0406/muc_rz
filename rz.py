@@ -8,12 +8,12 @@ import time
 
 url = "http://192.168.2.231/srun_portal_pc.php?ac_id=1&"
 
-with open('user.json', 'r') as _:
+with open('/etc/rz/user.json', 'r') as _:
     post_data = json.load(_)
     post_body = urlencode(post_data)
 _.close()
 
-with open('header.json', 'r') as _:
+with open('/etc/rz/header.json', 'r') as _:
     header = json.load(_)
 _.close()
 
