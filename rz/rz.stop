@@ -1,0 +1,4 @@
+#!/bin/bash
+PID=`cat /etc/rz/rz.pid`
+kill -9 ${PID}
+rm /etc/rz/rz.pid

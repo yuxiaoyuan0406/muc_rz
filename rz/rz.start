@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo $$ > /etc/rz/rz.pic
+
+/usr/bin/python3 /etc/rz/rz.py

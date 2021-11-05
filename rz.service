@@ -1,0 +1,12 @@
+[Unit]
+Description=muc internet authorization daemon
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/etc/rz/rz.start
+ExecStop=/etc/rz/rz.stop
+
+[Install]
+WantedBy=multi-user.target
