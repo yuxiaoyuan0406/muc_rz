@@ -6,4 +6,3 @@ sudo cp rz.service /usr/lib/systemd/system/
 sudo cp *.json /etc/rz/
 
 # sudo systemctl enable rz
-
