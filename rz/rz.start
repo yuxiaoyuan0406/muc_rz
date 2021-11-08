@@ -2,4 +2,4 @@
 
 echo $$ > /etc/rz/rz.pid
 
-/usr/bin/python3 /etc/rz/rz.py
+/usr/bin/python3 /etc/rz/rz.py /etc/rz/rz.json

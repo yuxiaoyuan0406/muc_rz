@@ -21,6 +21,20 @@
 
 只需修改`username`和`password`字段
 
+## 参数设定
+
+修改`/etc/rz/rz.json`来调整认证参数, 包括认证地址, 认证头, 认证用户等内容
+
+```json
+{
+    "header": "/etc/rz/header.json", 
+    "user": "/etc/rz/user.json",
+    "url": "http://192.168.2.231/srun_portal_pc.php?ac_id=1&",
+    "pingURL": "baidu.com",
+    "pingCount": 1
+}
+```
+
 ## 启动守护
 
 执行`sudo systemctl enable rz.service`
