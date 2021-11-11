@@ -3,5 +3,5 @@
     "user": "/etc/rz/user.json",
     "url": "http://192.168.2.231/srun_portal_pc.php?ac_id=1&",
     "pingURL": "baidu.com",
-    "pingCount": 1
+    "pingCount": 5
 }
