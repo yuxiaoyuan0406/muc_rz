@@ -5,6 +5,7 @@ After=network.target
 [Service]
 Type=simple
 Restart=on-failure
+RestartSec=3
 User=root
 ExecStart=/etc/rz/rz.start
 ExecStop=/etc/rz/rz.stop
