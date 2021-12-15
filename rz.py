@@ -67,13 +67,17 @@ if __name__ == "__main__":
         header: dict = json.load(_)
     _.close()
 
+    # create pool manager
     manager: urllib3.poolmanager.PoolManager = urllib3.PoolManager()
+    
+    # begin checking
     echo('system begin.')
     while (True):
         if(os.system('ping {} -c {} >> /dev/null'.format(
             config.get('pingURL', 'baidu.com'),
             config.get('pingCount', 3)
         ))):
+            # ping failed
             echo('re-connecting...')
             assert ping(host, config.get('pingCount', 1)
                 ) == 0, '[ERROR]: Name or service unreachable.'
