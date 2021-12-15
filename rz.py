@@ -28,9 +28,15 @@ def ping(host: str, count: int):
     '''
     ping a host for limited times
     '''
-    return os.system('ping {} -c {}'.format(
+    return os.system('ping {} -c {} >> /dev/null'.format(
         host, count
     ))
+    
+def echo(msg: str):
+    '''
+    calling system function echo
+    '''
+    return os.system('echo \"{}\"'.format(msg))
 
 
 if __name__ == "__main__":
@@ -62,14 +68,15 @@ if __name__ == "__main__":
     _.close()
 
     manager: urllib3.poolmanager.PoolManager = urllib3.PoolManager()
+    echo('system begin.')
     while (True):
-        if(os.system('ping {} -c {}'.format(
+        if(os.system('ping {} -c {} >> /dev/null'.format(
             config.get('pingURL', 'baidu.com'),
             config.get('pingCount', 3)
         ))):
-            print('re-connecting...')
+            echo('re-connecting...')
             assert ping(host, config.get('pingCount', 1)
                 ) == 0, '[ERROR]: Name or service unreachable.'
             r = post(manager, url, header, post_body)
-            print('response: {}'.format(r.status))
+            echo('response: {}'.format(r.status))
         time.sleep(1)
