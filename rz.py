@@ -7,6 +7,11 @@ import os
 import time
 import sys
 
+default_auth_url: str = "http://192.168.2.231/srun_portal_pc.php?ac_id=1&"
+default_ping_count: int = 3
+default_user_info_dir: str = '/etc/rz/user.json'
+default_post_header_dir: str = '/etc/rz/header.json'
+default_ping_test_url: str = 'baidu.com'
 
 def post(
         manager: urllib3.poolmanager.PoolManager,
@@ -51,19 +56,19 @@ if __name__ == "__main__":
 
     # get authorization url
     url: str = config.get(
-        'url', "http://192.168.2.231/srun_portal_pc.php?ac_id=1&")
+        'url', default_auth_url)
     # check authorization url
     host: str = urlparse(url).hostname
-    assert ping(host, config.get('pingCount', 3)
+    assert ping(host, config.get('pingCount', default_ping_count)
                 ) == 0, '[ERROR]: Name or service unreachable. Is this host correct?\n{}'.format(host)
 
     # load user file
-    with open(config.get('user', '/etc/rz/user.json'), 'r') as _:
+    with open(config.get('user', default_user_info_dir), 'r') as _:
         post_body: str = urlencode(json.load(_))
     _.close()
 
     # load http post header file
-    with open(config.get('header', '/etc/rz/header.json'), 'r') as _:
+    with open(config.get('header', default_post_header_dir), 'r') as _:
         header: dict = json.load(_)
     _.close()
 
@@ -74,12 +79,12 @@ if __name__ == "__main__":
     echo('system begin.')
     while (True):
         if(os.system('ping {} -c {} >> /dev/null'.format(
-            config.get('pingURL', 'baidu.com'),
-            config.get('pingCount', 3)
+            config.get('pingURL', default_ping_test_url),
+            config.get('pingCount', default_ping_count)
         ))):
             # ping failed
             echo('re-connecting...')
-            assert ping(host, config.get('pingCount', 1)
+            assert ping(host, config.get('pingCount', default_ping_count)
                 ) == 0, '[ERROR]: Name or service unreachable.'
             r = post(manager, url, header, post_body)
             echo('response: {}'.format(r.status))
